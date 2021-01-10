@@ -38,10 +38,16 @@ export default function App() {
     }
   }
 
-  const submitImg = async(img) => {
-    // TODO: fetch api 
+  const submitImg = async() => {
+    console.log(selectedImage.localUri)
     console.log("submitting image to backend")
-  } 
+    return fetch('https://goodgredients-backend.herokuapp.com/api/ingredients', {
+      method: 'POST',
+      // headers: {'Content-Type':'multipart/form-data'},
+      body: {location: selectedImage.localUri}
+  }).then((response) => response.json())
+  .then((data) => console.log(data))
+  }
 
   if (selectedImage !== null) {
     return (
@@ -62,7 +68,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Image source={{ uri: '/Users/soyoung/Desktop/nw2021/GoodgredientsFront/GoodgredientsApp/img/gglogo.png' }} style={styles.logo} />
+      <Image source={{ uri: './img/gglogo.png' }} style={styles.logo} />
       <Text style={styles.instructions}>
         Just take a photo of your ingredient list! We'll take care the rest 
       </Text>

@@ -36,6 +36,7 @@ function HomeScreen({ navigation }) {
         return;
       }
       setSelectedImage({ localUri: pickerResult.uri });
+      navigation.navigate('SubmitScreen', {uri: pickerResult.uri })
 
     } else {
       Alert.alert("You need to give us permissionto first :(")
@@ -77,7 +78,7 @@ function HomeScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      {/* <Image source={{ uri: 'https://i.stack.imgur.com/tWJ66.jpg' }} style={styles.logo} /> */}
+      <Image source={{ uri: 'https://github.com/nw2021/Goodgredients/blob/main/img/gglogo.png?raw=true' }} style={styles.logo} />
       <Text style={styles.instructions}>
         Just take a photo of your ingredient list! We'll take care the rest 
       </Text>
@@ -93,20 +94,8 @@ function HomeScreen({ navigation }) {
         style={styles.button}>
         <Text style={styles.buttonText}>Pick from camera</Text>
       </TouchableOpacity>
-
-      <Ionicons.Button onlyicon name="ios-camera-outline" size={60} backgroundColor="#FAFAFA"  
-      color="black" onPress={() => navigation.navigate('ResultScreen')}>
-      </Ionicons.Button>
-
-      <Button
-          title="Add some friends"
-          onPress={() =>
-            navigation.navigate('ResultScreen')
-          }
-        />
     </View>
   );
-
 }
 
 

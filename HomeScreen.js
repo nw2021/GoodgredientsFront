@@ -1,10 +1,12 @@
 import React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View, Alert, Button } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View, Alert, ImageBackground, Button } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from  'expo-permissions';
 import { Ionicons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+
+const image = { uri: 'https://images.unsplash.com/photo-1503435980610-a51f3ddfee50?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80' };
 
 function HomeScreen({ navigation }) {
 
@@ -61,40 +63,54 @@ function HomeScreen({ navigation }) {
 
   if (selectedImage !== null) {
     return (
+     <ImageBackground source={image} style={styles.image}>
         <View style={styles.container}>
           <Image
             source={{ uri: selectedImage.localUri }}
             style={styles.thumbnail}
           />
-          <TouchableOpacity
-            style={styles.button}
-            onPress={submitImg}
-          >
-            <Text style={styles.buttonText}>Submit</Text>
-          </TouchableOpacity>
         </View>
+        <View style={styles.container}>
+          <TouchableOpacity 
+            style={styles.submitButton}
+            onPress={submitImg}
+            title="Submit!">
+            <Text style={styles.buttonText}>Submit!</Text>
+            </TouchableOpacity>
+        </View>
+        </ImageBackground>
       );
     }
 
   return (
-    <View style={styles.container}>
-      <Image source={{ uri: 'https://github.com/nw2021/Goodgredients/blob/main/img/gglogo.png?raw=true' }} style={styles.logo} />
-      <Text style={styles.instructions}>
-        Just take a photo of your ingredient list! We'll take care the rest 
+      <ImageBackground source={image} style={styles.image}>
+        <View>
+        {/* <Image source={{ uri: 'https://github.com/nw2021/Goodgredients/blob/main/img/gglogo.png?raw=true' }} style={styles.logo} /> */}
+      <Text style={styles.title}>
+        Welcome to Goodgredients
       </Text>
-
+      <Text style={styles.instructions}>
+      Submit a photo of the ingredients to do a quick check!
+      </Text>
+      
+      <View style={styles.alternativeLayoutButtonContainer}>
       <TouchableOpacity
+        title="Gallery"
         onPress={pickFromGallery}
         style={styles.button}>
-        <Text style={styles.buttonText}>Pick from gallery</Text>
+        <Text style={{ fontSize: 20, color: '#fff' , text: 'center'}}>Gallery</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
+        title="Camera"
         onPress={pickFromCamera}
-        style={styles.button}>
-        <Text style={styles.buttonText}>Pick from camera</Text>
+        style={styles.button}
+      >
+      <Text style={{ fontSize: 20, color: '#fff' }}>Camera</Text>
       </TouchableOpacity>
-    </View>
+      </View>
+      </View>
+      </ImageBackground>
   );
 }
 
@@ -102,36 +118,73 @@ function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
+    flexDirection: 'row',
     justifyContent: 'center',
+  },
+  title: {
+    color: '#4FADA6',
+    fontSize: 45,
+    marginHorizontal: 15,
+    marginBottom: 30,
+    fontWeight: "bold"
   },
   logo: {
     width: 330,
     height: 510,
     marginBottom: 20,
   },
+  image: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
+  },
   instructions: {
-    color: '#888',
-    fontSize: 18,
+    color: '#555555',
+    fontSize: 22,
     marginHorizontal: 15,
     marginBottom: 10,
+    fontFamily: 'Montserrat',
   },
   button: {
+    justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#DDDDDD',
-    padding: 20,
-    borderRadius: 5,
+    flex: 1,
+  },
+  submitButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+    marginTop:10
   },
   buttonText: {
     fontSize: 20,
     color: '#fff',
   },
   thumbnail: {
-    width: 300,
-    height: 300,
+    width: 400,
+    height: 400,
     resizeMode: 'contain',
+    justifyContent: 'center',
   },
+  alternativeLayoutButtonContainer: {
+    margin: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor:'#00BCD4',
+    borderRadius:10,
+    borderWidth: 1,
+    marginTop:10,
+    paddingTop:15,
+    paddingBottom:15,
+    marginLeft:30,
+    marginRight:30,
+    backgroundColor:'#00BCD4',
+    borderRadius:10,
+    borderWidth: 1,
+    borderColor: '#fff',
+    borderBottomColor: '#88d498',
+
+  }
 });
 
 

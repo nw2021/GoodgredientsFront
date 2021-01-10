@@ -1,5 +1,5 @@
 import React, { useEffect, useState} from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
 import 'react-native-gesture-handler';
 
 function ResultScreen({ route, navigation }) {
@@ -15,10 +15,23 @@ function ResultScreen({ route, navigation }) {
         "label": "PEG",
       }])
 
+      const renderItem = ({item: {label, description}}) => {
+        return (
+          <View style={styles.item}>
+            <Text style={styles.title}>:warning:{label}</Text>
+            <Text>{description}</Text>
+          </View>
+        )
+      }
+
     return (
       <View style={styles.container}>
-        <Text>ResultScreen</Text>
-        <Text> {item[0].chemical}</Text>
+        <Text style={styles.menu}>Result: The Ingredients that might harmful to you</Text>
+        <FlatList
+          data={item}
+          renderItem={renderItem}
+          keyExtractor={item => item.label}
+        />
         <Button
           title="Go Back to home"
           onPress={() =>
@@ -34,6 +47,21 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
+    },
+    item: {
+      backgroundColor: '#88d498',
+      padding: 20,
+      marginVertical: 8,
+      marginHorizontal: 16,
+      borderRadius: 5,
+    },
+    title: {
+      fontSize: 32,
+      fontFamily: 'Montserrat',
+    },
+    menu: {
+      fontSize: 14,
+      fontFamily: 'Montserrat',
     },
 })
 

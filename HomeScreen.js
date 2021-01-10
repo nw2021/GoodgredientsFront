@@ -71,14 +71,14 @@ function HomeScreen({ navigation }) {
           />
         </View>
         <View style={styles.container}>
-          <Button
-            style={styles.alternativeLayoutButtonContainer}
+          <TouchableOpacity 
+            style={styles.submitButton}
             onPress={submitImg}
-            title="Submit!"
-          />
+            title="Submit!">
+            <Text style={styles.buttonText}>Submit!</Text>
+            </TouchableOpacity>
         </View>
         </ImageBackground>
-        
       );
     }
 
@@ -98,7 +98,7 @@ function HomeScreen({ navigation }) {
         title="Gallery"
         onPress={pickFromGallery}
         style={styles.button}>
-        <Text style={{ fontSize: 20, color: '#fff' }}>Gallery</Text>
+        <Text style={{ fontSize: 20, color: '#fff' , text: 'center'}}>Gallery</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -118,8 +118,6 @@ function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
   },
@@ -141,7 +139,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   instructions: {
-    color: '#888',
+    color: '#555555',
     fontSize: 22,
     marginHorizontal: 15,
     marginBottom: 10,
@@ -151,7 +149,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
-    backgroundColor: 'blue'
+  },
+  submitButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+    marginTop:10
   },
   buttonText: {
     fontSize: 20,
@@ -161,11 +164,26 @@ const styles = StyleSheet.create({
     width: 400,
     height: 400,
     resizeMode: 'contain',
+    justifyContent: 'center',
   },
   alternativeLayoutButtonContainer: {
     margin: 20,
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    backgroundColor:'#00BCD4',
+    borderRadius:10,
+    borderWidth: 1,
+    marginTop:10,
+    paddingTop:15,
+    paddingBottom:15,
+    marginLeft:30,
+    marginRight:30,
+    backgroundColor:'#00BCD4',
+    borderRadius:10,
+    borderWidth: 1,
+    borderColor: '#fff',
+    borderBottomColor: '#88d498',
+
   }
 });
 
